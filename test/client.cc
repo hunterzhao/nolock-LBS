@@ -76,7 +76,7 @@ int testLoop(int thread_num, int port)
                       //GEOADD
          	      reply = (redisReply*)redisCommand(c, 
 					      "GEOADD %s %f %f %s", 
-					      "sichuan", (double)k, (double)i, 
+					      "sichuan", 104.06, 30.67, 
 					      city_name.c_str());
 	              assert(reply->integer == 1);
 	              //GEOSEARCH

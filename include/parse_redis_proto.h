@@ -14,6 +14,6 @@
  world\r\n
 */
 
-extern bool encode(std::string& res, int type, std::vector<std::string> package);
+extern bool encode(std::string& res, int type, std::vector<std::string>& package);
 
 bool decode(char* msg, int limit, int& len, std::vector<std::string>& ans);

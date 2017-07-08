@@ -49,7 +49,7 @@ public:
         DLOG(INFO) << "thread pool dry";
         for (auto& reactor : reactors_)
         {
-            LOG(ERROR) << "left " << reactor->getHandlerNum();
+            DLOG(ERROR) << "left " << reactor->getHandlerNum();
             delete reactor;
         }
         reactors_.clear();
@@ -76,7 +76,7 @@ public:
             socket_event->setReactor(reactors_[id]);
             if (socket_event->init() < 0)
             {
-                LOG(ERROR) << id <<" init error";
+                DLOG(ERROR) << id <<" init error";
                 socket_event->closeInNextLoop();
             }
         }

@@ -37,7 +37,7 @@ SocketEvent::~SocketEvent()
 
 void SocketEvent::closeInNextLoop()
 {
-    LOG(WARNING) << "close in next loop";
+    DLOG(WARNING) << "close in next loop";
     reactor_->appendPollTask(std::move(std::bind(&SocketEvent::close, this)));
 }
 
@@ -46,13 +46,13 @@ int SocketEvent::setNoBlock()
     int opts = ::fcntl(fd_, F_GETFL);
 	if (opts < 0)
 	{
-        LOG(ERROR) << "fcntl sock failed";
+        DLOG(ERROR) << "fcntl sock failed";
 		exit(1);
 	}
 	opts = opts | O_NONBLOCK;
 	if (::fcntl(fd_, F_SETFL, opts) < 0)
 	{
-		LOG(ERROR) << "fcntl sock failed";
+		DLOG(ERROR) << "fcntl sock failed";
 		exit(1);
 	}
     return 1;
@@ -64,7 +64,7 @@ int SocketEvent::reuseAddress()
     if (::setsockopt(fd_, SOL_SOCKET, 
     	SO_REUSEADDR, &reuse, sizeof(reuse)) > 0)
     {
-        LOG(ERROR) << "exit reuse address";
+        DLOG(ERROR) << "exit reuse address";
     	exit(-1);
     }
     return 1;
@@ -106,7 +106,7 @@ int SocketEvent::send(char* data, size_t n)
   
     if (out_->append(data, n) < 0)
     {
-        LOG(ERROR) << "buffer is full,append faild";
+        DLOG(ERROR) << "buffer is full,append faild";
         return -1;
     }
     return 1;
@@ -121,7 +121,7 @@ void SocketEvent::setReactor(Reactor* reactor)
     }
     else 
     {
-        LOG(ERROR) << "reactor is not null";
+        DLOG(ERROR) << "reactor is not null";
     }
 }
 }

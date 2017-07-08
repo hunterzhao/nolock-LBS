@@ -46,7 +46,7 @@ int LBSSocketEvent::onEvent(int event)
 {
     if (event & EVENT_HUP)
     {
-        LOG(ERROR) << "hup";
+        DLOG(ERROR) << "hup";
         closeInNextLoop();
         return -1;
     }
@@ -73,7 +73,7 @@ int LBSSocketEvent::onEvent(int event)
         DLOG(INFO) << "event in";
         if (dataIn() < 0)
         {
-        	closeInNextLoop();
+            closeInNextLoop();
             return -1;
         }
     }
@@ -91,10 +91,12 @@ void LBSSocketEvent::close()
 int LBSSocketEvent::dataIn()
 {
     //将新到来的数据添加到buffer in 缓冲区
+    //printf("start read \n");
     if (in_->readFromFd() < 0)
     {
          return -1;
     }
+    //printf("read over\n");
     detectPackage();
     return 1;
 }
@@ -111,6 +113,10 @@ int LBSSocketEvent::dataOut()
 
 void LBSSocketEvent::detectPackage()
 {
+    char data[MAX_BUFFER_SIZE];
+    int i = 0;
+    size_t parse_len = 0;
+    size_t res_len   = 0;
     while(1)
     {
        std::vector<std::string> package_req_content;
@@ -122,28 +128,34 @@ void LBSSocketEvent::detectPackage()
            DLOG(WARNING) << "wrong decode wait next data";
            break;
        }
+       //printf(" %d one package over\n", i++);
        in_->moveStart(package_req_len);
-
+       parse_len += package_req_len; 
        DLOG(INFO) << in_->getLen();
-       in_->copy2Left(package_req_len);       
-       DLOG(INFO) << "copy to left" << package_req_len << "space left" << in_->getLen();
+       //in_->copy2Left(package_req_len);       
+       //DLOG(INFO) << "copy to left" << package_req_len << "space left" << in_->getLen();
        if (requestor_(package_req_content, package_res_content) < 0)
        {
-           LOG(ERROR) << "wrong package";
+           DLOG(ERROR) << "wrong package";
            continue;
        }
 
-       char data[MAX_BUFFER_SIZE];
-       std::copy(package_res_content.begin(), package_res_content.end(), data);
-       DLOG(INFO) << "try to send " << package_res_content.size();
-       if (send(data, package_res_content.size()) < 0)
-       {
-           DLOG(WARNING) << "send error";
-           closeInNextLoop();
-           return;
-       }
-    }    
+       std::copy(package_res_content.begin(), package_res_content.end(), data + res_len);
+       res_len += package_res_content.size(); 
+    }
+    
+    DLOG(INFO) << "try to send " << parse_len;
+    //data[res_len] = '\0';
+    //printf("%s", data);
+    if (send(data, res_len) < 0)
+    {
+       DLOG(WARNING) << "send error";
+       closeInNextLoop();
+       return;
+    }
+    in_->copy2Left(parse_len);
     reactor_->modifyHandler(this, EVENT_IN | EVENT_OUT);
+    //printf("detect over\n");
 }
 
 //void LBSSocketEvent::detectPackage()

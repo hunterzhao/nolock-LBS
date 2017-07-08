@@ -114,7 +114,7 @@ int Reactor::removeHandler(SocketEvent* socket_event)
     if (socket_events_.size() == 0)
     {
 
-        LOG(ERROR) << "handler is all empty";
+        DLOG(ERROR) << "handler is all empty";
     }
     return 1;
 }

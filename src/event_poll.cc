@@ -74,7 +74,7 @@ int EventPoll::poll()
 	{
 		if (errno != EINTR)
 		{
-            LOG(ERROR) << "error";
+            DLOG(ERROR) << "error";
 			return -1;
 		}
 
@@ -89,7 +89,7 @@ struct epoll_event& EventPoll::getActiveEvent(int id)
 	if (id > EVENT_SIZE || id < 0)
 	{
 		//error
-	    LOG(ERROR) << "out of index";
+	    DLOG(ERROR) << "out of index";
 		exit(-1);
 	}
 	return events_[id];

@@ -102,7 +102,7 @@ int DataBuffer::append(char* data, size_t len)
         return 1;
     if (end_ + len > MAX_BUFFER_SIZE)
     {
-        LOG(ERROR) << "start:" << start_ << " end:" << end_ << " len:" << len;
+        DLOG(ERROR) << "start:" << start_ << " end:" << end_ << " len:" << len;
     	return -1;
     }
     ::memcpy(end(), data, len);
@@ -116,7 +116,7 @@ int DataBuffer::readNFromFd(size_t count)
     /* 循环读取fd上的数据，直到遇到EAGAIN错误*/
     if (leftSpace() < count)
     {
-        LOG(ERROR) << "no left space, start" << start_ <<", end "<< end_;
+        DLOG(ERROR) << "no left space, start" << start_ <<", end "<< end_;
         return -1;
     }
 
@@ -131,7 +131,7 @@ int DataBuffer::readNFromFd(size_t count)
                 continue;
             if (errno == EAGAIN || errno == EWOULDBLOCK)
                 break;
-            LOG(ERROR) << "read error";
+            DLOG(ERROR) << "read error";
             return -1;
         } 
 
@@ -159,7 +159,7 @@ int DataBuffer::readFromFd()
     { 
         if (n >= MAX_BUFFER_SIZE)
         {
-            LOG(ERROR) << "read in data too large";
+            DLOG(ERROR) << "read in data too large";
             return -1;
         }
         nread = ::read(fd_, data + n, MAX_BUFFER_SIZE - n);
@@ -174,20 +174,20 @@ int DataBuffer::readFromFd()
             if (errno == EAGAIN || errno == EWOULDBLOCK) //缓冲区已空
                 break;
 
-            LOG(ERROR) << "read failed"; //其他错误 关闭连接
+            DLOG(ERROR) << "read failed"; //其他错误 关闭连接
             return -1;
         }
 
         if (0 == nread) 
         {
-            LOG(ERROR) << "peer close";  //对端关闭连接，关闭连接
+            DLOG(ERROR) << "peer close";  //对端关闭连接，关闭连接
             return -1;
         }
     }
     //内核缓冲区的数据全部都读到用户缓冲区了
     if(append(data, n) < 0)
     {
-    	LOG(ERROR) << "user buffer is full";
+    	DLOG(ERROR) << "user buffer is full";
     	return -1;
     }
     return 1;
@@ -220,7 +220,7 @@ int DataBuffer::writeToFd()
                 continue;
             if (errno == EAGAIN || errno == EWOULDBLOCK)
                 break;
-            LOG(ERROR) << "write failed";
+            DLOG(ERROR) << "write failed";
             return -1;
         }
     }

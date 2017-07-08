@@ -2,7 +2,6 @@ set(SOURCE_FILES
              databuffer.cc
              event_poll.cc
              lbs_server.cc
-             message.pb.cc
              lbs_socket_event.cc
              listen_socket_event.cc
              notify_event.cc

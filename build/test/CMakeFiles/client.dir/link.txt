@@ -1,0 +1,1 @@
+/usr/bin/c++    -g -pthread -std=c++11 -Wall -O2 -DNDEBUG   CMakeFiles/client.dir/client.cc.o CMakeFiles/client.dir/message.pb.cc.o CMakeFiles/client.dir/until.cc.o  -o ../../bin/client  -L/mnt/hgfs/workstation/nolock-LBS/lib -rdynamic -lprotobuf -lhiredis -Wl,-rpath,/mnt/hgfs/workstation/nolock-LBS/lib 

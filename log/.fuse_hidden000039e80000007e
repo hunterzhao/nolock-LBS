@@ -1,0 +1,4 @@
+Log file created at: 2017/07/08 10:20:06
+Running on machine: ubuntu
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+E0708 10:20:06.446990 35486 server.cc:23] server start

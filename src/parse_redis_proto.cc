@@ -15,7 +15,7 @@
  world\r\n
 */
 
-bool encode(std::string& res, int type, std::vector<std::string> package)
+bool encode(std::string& res, int type, std::vector<std::string>& package)
 {
    int n = package.size();
    if (n ==0) return 0;
@@ -37,7 +37,7 @@ bool encode(std::string& res, int type, std::vector<std::string> package)
    DLOG(INFO) << "redis res" << res; 
    if (res.size() > MAX_PACKAGE_LEN)
    {
-       LOG(ERROR) << "mesg too long";
+       DLOG(ERROR) << "mesg too long";
        return false;
    }
    return true;

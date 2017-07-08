@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 #include <vector>
-
+#include <unordered_set>
 namespace lbs
 {
 class Reactor;
@@ -28,6 +28,7 @@ private:
     ThreadPool* thread_pool_ = nullptr;
     ListenSocketEvent* listen_event_ = nullptr;
     int num_client = 0;
+    std::unordered_set<std::string> set_;
 };
 }
 #endif

@@ -44,7 +44,7 @@ void NotifyEvent::notify()
     int ret = ::write(fd_, &call, sizeof(call));
     if (ret < 0)
     {
-        LOG(ERROR) << "eventfd error";
+        DLOG(ERROR) << "eventfd error";
     }
 }
 }

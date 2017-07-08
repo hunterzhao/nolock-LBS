@@ -1,0 +1,1 @@
+/usr/bin/c++    -g -pthread -std=c++11 -Wall -O2 -DNDEBUG   CMakeFiles/server.dir/server.cc.o  -o ../../bin/server  -L/mnt/hgfs/workstation/nolock-LBS/lib -rdynamic ../src/liblbs.a -lprotobuf ../geo/libgeo.a -lglog -lprofiler -ltcmalloc -Wl,-rpath,/mnt/hgfs/workstation/nolock-LBS/lib 

@@ -1,0 +1,14 @@
+/mnt/hgfs/workstation/nolock-LBS/build/CMakeFiles/edit_cache.dir
+/mnt/hgfs/workstation/nolock-LBS/build/CMakeFiles/rebuild_cache.dir
+/mnt/hgfs/workstation/nolock-LBS/build/geo/CMakeFiles/edit_cache.dir
+/mnt/hgfs/workstation/nolock-LBS/build/geo/CMakeFiles/rebuild_cache.dir
+/mnt/hgfs/workstation/nolock-LBS/build/geo/CMakeFiles/geo_so.dir
+/mnt/hgfs/workstation/nolock-LBS/build/geo/CMakeFiles/geo.dir
+/mnt/hgfs/workstation/nolock-LBS/build/src/CMakeFiles/edit_cache.dir
+/mnt/hgfs/workstation/nolock-LBS/build/src/CMakeFiles/rebuild_cache.dir
+/mnt/hgfs/workstation/nolock-LBS/build/src/CMakeFiles/lbs_so.dir
+/mnt/hgfs/workstation/nolock-LBS/build/src/CMakeFiles/lbs.dir
+/mnt/hgfs/workstation/nolock-LBS/build/test/CMakeFiles/rebuild_cache.dir
+/mnt/hgfs/workstation/nolock-LBS/build/test/CMakeFiles/edit_cache.dir
+/mnt/hgfs/workstation/nolock-LBS/build/test/CMakeFiles/client.dir
+/mnt/hgfs/workstation/nolock-LBS/build/test/CMakeFiles/server.dir

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgeo.a  CMakeFiles/geo.dir/geointerface.cc.o CMakeFiles/geo.dir/geohash.cc.o CMakeFiles/geo.dir/trie_tree.cc.o
+/usr/bin/ranlib libgeo.a

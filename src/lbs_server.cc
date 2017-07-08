@@ -17,7 +17,7 @@ namespace lbs
 {
 LBSServer::LBSServer(Reactor* reactor) 
     : reactor_(reactor),
-      thread_pool_(new ThreadPool(2))
+      thread_pool_(new ThreadPool(1))
 {
 }
 
@@ -82,10 +82,10 @@ int LBSServer::onAccept(int fd)
 
 int LBSServer::doRequest(const std::vector<std::string>& req, std::string& res)
 {
-    geo::GeoInterface geo;
+    //geo::GeoInterface geo;
     if (req.size() == 0) 
     {
-       LOG(ERROR) << "request is null";
+       DLOG(ERROR) << "request is null";
        return -1;
     }
     std::string req_type = req[0];
@@ -94,6 +94,17 @@ int LBSServer::doRequest(const std::vector<std::string>& req, std::string& res)
        for (auto str : req)
            std::cout << str << std::endl;
     #endif    
+    if (req_type == "SET")
+    {
+       DLOG(INFO) << "SET";
+       set_.insert(req[1]);
+       res_arry.push_back(std::string("OK"));
+       if (encode(res, 0, res_arry) == false) return -1;
+       DLOG(INFO) << " return ok set ok";
+       return 1;
+    }
+    
+    geo::GeoInterface geo;
     if (req_type == "GEOADD")
     {
        DLOG(INFO) << "GEOADD request";
@@ -123,7 +134,7 @@ int LBSServer::doRequest(const std::vector<std::string>& req, std::string& res)
        DLOG(INFO) << "GEOLIST request";
        return 1;
     }
-    LOG(ERROR) << "unknown command";
+    DLOG(ERROR) << "unknown command";
     return 1;
 }
 //int LBSServer::doRequest(const std::vector<std::string>& req, std::vector<std::string>& res)

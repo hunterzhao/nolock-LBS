@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblbs.a  CMakeFiles/lbs.dir/databuffer.cc.o CMakeFiles/lbs.dir/event_poll.cc.o CMakeFiles/lbs.dir/lbs_server.cc.o CMakeFiles/lbs.dir/lbs_socket_event.cc.o CMakeFiles/lbs.dir/listen_socket_event.cc.o CMakeFiles/lbs.dir/notify_event.cc.o CMakeFiles/lbs.dir/reactor.cc.o CMakeFiles/lbs.dir/socket_event.cc.o CMakeFiles/lbs.dir/log.cc.o CMakeFiles/lbs.dir/parse_redis_proto.cc.o
+/usr/bin/ranlib liblbs.a

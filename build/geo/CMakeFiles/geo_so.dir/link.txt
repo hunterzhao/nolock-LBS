@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -g -pthread -std=c++11 -Wall -O2 -DNDEBUG  -shared -Wl,-soname,libgeo.so -o libgeo.so CMakeFiles/geo_so.dir/geointerface.cc.o CMakeFiles/geo_so.dir/geohash.cc.o CMakeFiles/geo_so.dir/trie_tree.cc.o  -L/mnt/hgfs/workstation/nolock-LBS/lib 
